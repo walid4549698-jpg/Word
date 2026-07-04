@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เวิร์ดของฉัน</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <header id="titlebar">
+    <div class="title-left">
+      <span class="app-logo">W</span>
+      <input id="docTitle" type="text" value="เอกสารที่ไม่มีชื่อ" spellcheck="false">
+    </div>
+    <div class="title-right">
+      <span id="saveStatus">บันทึกอัตโนมัติแล้ว</span>
+    </div>
+  </header>
+
+  <div id="ribbon">
+    <div class="ribbon-tabs">
+      <button class="ribbon-tab active" data-tab="home">หน้าแรก</button>
+      <button class="ribbon-tab" data-tab="insert">แทรก</button>
+      <button class="ribbon-tab" data-tab="layout">เค้าโครงหน้ากระดาษ</button>
+      <button class="ribbon-tab" data-tab="review">ตรวจทาน</button>
+      <button class="ribbon-tab" data-tab="file">ไฟล์</button>
+    </div>
+
+    <div class="ribbon-panels">
+
+      <div class="ribbon-panel active" data-panel="home">
+        <div class="group">
+          <div class="group-row">
+            <button data-cmd="undo" title="เลิกทำ">↶</button>
+            <button data-cmd="redo" title="ทำซ้ำ">↷</button>
+            <button data-cmd="removeFormat" title="ล้างรูปแบบ">✕ᴬ</button>
+          </div>
+          <div class="group-label">เลิกทำ</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <select id="fontName" title="แบบอักษร">
+              <option value="'TH Sarabun New','Sarabun','Leelawadee UI',sans-serif" selected>TH Sarabun New</option>
+              <option value="'Leelawadee UI',sans-serif">Leelawadee UI</option>
+              <option value="'Angsana New',serif">Angsana New</option>
+              <option value="'Cordia New',sans-serif">Cordia New</option>
+              <option value="'Tahoma',sans-serif">Tahoma</option>
+              <option value="'Times New Roman',serif">Times New Roman</option>
+              <option value="'Arial',sans-serif">Arial</option>
+              <option value="'Calibri',sans-serif">Calibri</option>
+            </select>
+            <select id="fontSize" title="ขนาดตัวอักษร">
+              <option>8</option><option>9</option><option>10</option><option>11</option>
+              <option>12</option><option>14</option><option selected>16</option>
+              <option>18</option><option>20</option><option>22</option><option>24</option>
+              <option>26</option><option>28</option><option>32</option><option>36</option>
+              <option>40</option><option>44</option><option>48</option><option>60</option><option>72</option>
+            </select>
+          </div>
+          <div class="group-row">
+            <button data-cmd="bold" title="ตัวหนา"><b>B</b></button>
+            <button data-cmd="italic" title="ตัวเอียง"><i>I</i></button>
+            <button data-cmd="underline" title="ขีดเส้นใต้"><u>U</u></button>
+            <button data-cmd="strikeThrough" title="ขีดฆ่า"><s>S</s></button>
+            <label class="color-swatch" title="สีตัวอักษร">
+              <span id="foreColorSwatch">ก</span>
+              <input type="color" id="foreColor" value="#000000">
+            </label>
+            <label class="color-swatch" title="สีไฮไลต์">
+              <span id="hiliteColorSwatch">▨</span>
+              <input type="color" id="hiliteColor" value="#ffff00">
+            </label>
+          </div>
+          <div class="group-label">แบบอักษร</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <button data-cmd="justifyLeft" title="ชิดซ้าย">≡</button>
+            <button data-cmd="justifyCenter" title="กึ่งกลาง">≣</button>
+            <button data-cmd="justifyRight" title="ชิดขวา">≡</button>
+            <button data-cmd="justifyFull" title="กระจาย">☰</button>
+          </div>
+          <div class="group-row">
+            <button data-cmd="insertUnorderedList" title="สัญลักษณ์แสดงหัวข้อย่อย">•≡</button>
+            <button data-cmd="insertOrderedList" title="ลำดับเลข">1≡</button>
+            <button data-cmd="outdent" title="ลดระยะเยื้อง">⇤</button>
+            <button data-cmd="indent" title="เพิ่มระยะเยื้อง">⇥</button>
+            <select id="lineSpacing" title="ระยะห่างบรรทัด">
+              <option value="1">1.0</option>
+              <option value="1.15" selected>1.15</option>
+              <option value="1.5">1.5</option>
+              <option value="2">2.0</option>
+              <option value="2.5">2.5</option>
+            </select>
+          </div>
+          <div class="group-label">ย่อหน้า</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <label class="chk"><input type="checkbox" id="thaiWrapToggle" checked> ระบบตัดคำไทย</label>
+          </div>
+          <div class="group-row">
+            <button id="btnThaiRewrap">ตัดคำใหม่ทั้งหมด</button>
+          </div>
+          <div class="group-label">ภาษาไทย</div>
+        </div>
+      </div>
+
+      <div class="ribbon-panel" data-panel="insert">
+        <div class="group">
+          <div class="group-row">
+            <button id="btnInsertTable">ตาราง</button>
+            <button id="btnInsertHr">เส้นคั่น</button>
+            <button id="btnInsertImage">รูปภาพ</button>
+            <button id="btnInsertPageBreak">ตัวแบ่งหน้า</button>
+          </div>
+          <div class="group-label">แทรก</div>
+        </div>
+      </div>
+
+      <div class="ribbon-panel" data-panel="layout">
+        <div class="group">
+          <div class="group-row">
+            <label>ขนาดกระดาษ
+              <select id="paperSize">
+                <option value="A4">A4 (210 × 297 มม.)</option>
+                <option value="A5">A5 (148 × 210 มม.)</option>
+                <option value="B5">B5 (176 × 250 มม.)</option>
+                <option value="Letter">Letter (215.9 × 279.4 มม.)</option>
+                <option value="Legal">Legal (215.9 × 355.6 มม.)</option>
+                <option value="Custom">กำหนดเอง...</option>
+              </select>
+            </label>
+          </div>
+          <div class="group-row custom-size-row" id="customSizeRow" hidden>
+            <label>กว้าง(ซม.) <input type="number" id="customW" step="0.1" min="5" value="21"></label>
+            <label>สูง(ซม.) <input type="number" id="customH" step="0.1" min="5" value="29.7"></label>
+          </div>
+          <div class="group-label">ขนาดกระดาษ</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <button class="toggle-btn active" data-orient="portrait">แนวตั้ง</button>
+            <button class="toggle-btn" data-orient="landscape">แนวนอน</button>
+          </div>
+          <div class="group-label">การวางแนว</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <select id="marginPreset">
+              <option value="normal" selected>ปกติ (2.54 ซม.)</option>
+              <option value="narrow">แคบ (1.27 ซม.)</option>
+              <option value="moderate">พอประมาณ</option>
+              <option value="wide">กว้าง</option>
+              <option value="thaigov">ราชการไทย (3.0/2.0 ซม.)</option>
+              <option value="custom">กำหนดเอง...</option>
+            </select>
+          </div>
+          <div class="group-row custom-margin-row" id="customMarginRow" hidden>
+            <label>บน<input type="number" id="mTop" step="0.1" value="2.54"></label>
+            <label>ล่าง<input type="number" id="mBottom" step="0.1" value="2.54"></label>
+            <label>ซ้าย<input type="number" id="mLeft" step="0.1" value="2.54"></label>
+            <label>ขวา<input type="number" id="mRight" step="0.1" value="2.54"></label>
+          </div>
+          <div class="group-label">ระยะขอบ</div>
+        </div>
+
+        <div class="group">
+          <div class="group-row">
+            <select id="zoomLevel">
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1" selected>100%</option>
+              <option value="1.25">125%</option>
+              <option value="1.5">150%</option>
+            </select>
+          </div>
+          <div class="group-label">ย่อ/ขยาย</div>
+        </div>
+      </div>
+
+      <div class="ribbon-panel" data-panel="review">
+        <div class="group">
+          <div class="group-row">
+            <span id="wordCountLabel">คำ: 0</span>
+          </div>
+          <div class="group-row">
+            <span id="charCountLabel">ตัวอักษร: 0</span>
+          </div>
+          <div class="group-row">
+            <button id="btnWordCountDetail">รายละเอียด...</button>
+          </div>
+          <div class="group-label">จำนวนคำ</div>
+        </div>
+      </div>
+
+      <div class="ribbon-panel" data-panel="file">
+        <div class="group">
+          <div class="group-row">
+            <button id="btnNew">สร้างใหม่</button>
+            <button id="btnOpen">เปิดไฟล์...</button>
+            <input type="file" id="fileInput" accept=".html,.htm" hidden>
+          </div>
+          <div class="group-row">
+            <button id="btnSaveHtml">บันทึกเป็นไฟล์ (.html)</button>
+            <button id="btnPrint">พิมพ์ / บันทึกเป็น PDF</button>
+          </div>
+          <div class="group-label">ไฟล์</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="workspace">
+    <div id="paperScaleWrap">
+      <div id="rulerBar">
+        <div class="ruler-margin-zone" id="rulerMarginLeft"></div>
+        <div class="ruler-margin-zone" id="rulerMarginRight"></div>
+        <div id="rulerTicks"></div>
+        <div class="ruler-marker ruler-marker-firstline" id="markerFirstLine" title="ระยะเยื้องบรรทัดแรก"></div>
+        <div class="ruler-marker ruler-marker-left" id="markerLeftIndent" title="ระยะเยื้องซ้าย"></div>
+        <div class="ruler-marker ruler-marker-right" id="markerRightIndent" title="ระยะเยื้องขวา"></div>
+      </div>
+      <div id="paperOuter">
+        <div id="pageBgStack"></div>
+        <div id="editorOverlay" class="doc-content" contenteditable="true" lang="th" spellcheck="false"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar">
+    <span id="pageIndicator">หน้า 1 จาก 1</span>
+    <span class="sep">|</span>
+    <button id="wordCountLabel2" class="statusbar-link">คำ: 0</button>
+    <span class="sep">|</span>
+    <span id="langIndicator">ไทย</span>
+  </footer>
+
+</div>
+
+<div id="wordCountModalBackdrop" hidden>
+  <div id="wordCountModal">
+    <h3>จำนวนคำ</h3>
+    <table>
+      <tr><td>หน้า</td><td id="wcPages">0</td></tr>
+      <tr><td>จำนวนคำ</td><td id="wcWords">0</td></tr>
+      <tr><td>ตัวอักษร (ไม่รวมช่องว่าง)</td><td id="wcCharsNoSpace">0</td></tr>
+      <tr><td>ตัวอักษร (รวมช่องว่าง)</td><td id="wcCharsSpace">0</td></tr>
+      <tr><td>ย่อหน้า</td><td id="wcParagraphs">0</td></tr>
+      <tr><td>บรรทัด</td><td id="wcLines">0</td></tr>
+    </table>
+    <button id="btnCloseWordCount">ปิด</button>
+  </div>
+</div>
+
+<div id="printArea" class="doc-content" lang="th"></div>
+<style id="printPageStyle"></style>
+
+<script src="js/thai.js"></script>
+<script src="js/paginate.js"></script>
+<script src="js/ruler.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

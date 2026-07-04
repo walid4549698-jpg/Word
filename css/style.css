@@ -1,0 +1,254 @@
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Leelawadee UI', 'Tahoma', sans-serif;
+  background: #e9e9ec;
+  color: #1b1b1b;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Titlebar */
+#titlebar {
+  background: #2b579a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  flex: 0 0 auto;
+}
+.title-left { display: flex; align-items: center; gap: 10px; }
+.app-logo {
+  background: #fff; color: #2b579a; font-weight: 700;
+  width: 26px; height: 26px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+#docTitle {
+  background: transparent; border: 1px solid transparent; color: #fff;
+  font-size: 14px; padding: 3px 6px; border-radius: 3px; width: 260px;
+}
+#docTitle:hover, #docTitle:focus { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); outline: none; }
+#saveStatus { font-size: 12px; opacity: 0.85; }
+
+/* Ribbon */
+#ribbon { background: #f3f2f1; border-bottom: 1px solid #d0d0d0; flex: 0 0 auto; }
+.ribbon-tabs { display: flex; border-bottom: 1px solid #d9d9d9; background: #fafafa; }
+.ribbon-tab {
+  background: none; border: none; padding: 8px 18px; font-size: 13.5px;
+  cursor: pointer; color: #333; border-bottom: 2px solid transparent;
+}
+.ribbon-tab:hover { background: #ececec; }
+.ribbon-tab.active { border-bottom: 2px solid #2b579a; color: #2b579a; font-weight: 600; }
+
+.ribbon-panels { position: relative; }
+.ribbon-panel {
+  display: none;
+  padding: 8px 10px;
+  gap: 14px;
+  align-items: flex-start;
+}
+.ribbon-panel.active { display: flex; }
+
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 10px;
+  border-right: 1px solid #e0e0e0;
+  min-height: 62px;
+  justify-content: space-between;
+}
+.group:last-child { border-right: none; }
+.group-row { display: flex; gap: 4px; align-items: center; margin-bottom: 2px; }
+.group-label { font-size: 11px; color: #6b6b6b; margin-top: 2px; }
+
+#ribbon button {
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 28px;
+}
+#ribbon button:hover { background: #e8f0fe; border-color: #a9c6f5; }
+#ribbon button.active, #ribbon button.toggle-btn.active { background: #cfe2ff; border-color: #2b579a; }
+
+#ribbon select, #ribbon input[type=number], #ribbon input[type=text] {
+  border: 1px solid #d5d5d5; border-radius: 3px; padding: 3px 5px; font-size: 13px;
+}
+#ribbon select#fontName { width: 150px; }
+#ribbon select#fontSize { width: 60px; }
+
+.color-swatch { position: relative; display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #d5d5d5; border-radius: 3px; width: 28px; height: 26px; cursor: pointer; background:#fff; }
+.color-swatch input[type=color] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+#foreColorSwatch { border-bottom: 3px solid #000; }
+#hiliteColorSwatch { border-bottom: 3px solid #ffff00; }
+
+.chk { font-size: 12.5px; display: flex; align-items: center; gap: 4px; }
+
+.custom-size-row, .custom-margin-row { margin-top: 4px; }
+.custom-size-row label, .custom-margin-row label { font-size: 11.5px; display: flex; flex-direction: column; gap: 2px; }
+.custom-size-row input, .custom-margin-row input { width: 60px; }
+
+/* Workspace */
+#workspace {
+  flex: 1 1 auto;
+  overflow: auto;
+  background: #cfcfd4;
+  padding: 24px 0 80px;
+}
+#paperScaleWrap { display: flex; flex-direction: column; align-items: center; }
+#paperOuter { position: relative; transform-origin: top center; }
+
+#rulerBar {
+  position: relative;
+  height: 22px;
+  margin-bottom: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  user-select: none;
+}
+.ruler-margin-zone { position: absolute; top: 0; bottom: 0; background: #c9c9cf; }
+#rulerTicks { position: absolute; inset: 0; }
+.ruler-tick {
+  position: absolute; bottom: 0; width: 1px; background: #999;
+}
+.ruler-tick.major { height: 8px; }
+.ruler-tick.minor { height: 4px; }
+.ruler-num {
+  position: absolute; bottom: 8px; font-size: 9px; color: #555;
+  transform: translateX(-50%);
+}
+.ruler-marker {
+  position: absolute;
+  width: 0; height: 0;
+  cursor: ew-resize;
+  z-index: 3;
+}
+.ruler-marker-firstline {
+  top: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #2b579a;
+  transform: translateX(-5px);
+}
+.ruler-marker-left {
+  bottom: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #2b579a;
+  transform: translateX(-5px);
+}
+.ruler-marker-right {
+  bottom: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid #b0272d;
+  transform: translateX(-5px);
+}
+
+#pageBgStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--page-gap, 14mm);
+}
+.page-bg {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.05);
+  flex: 0 0 auto;
+}
+
+#editorOverlay {
+  position: absolute;
+  top: 0; left: 0;
+  outline: none;
+  cursor: text;
+  word-break: normal;
+  overflow-wrap: normal;
+  line-break: strict;
+  white-space: pre-wrap;
+  tab-size: 8;
+}
+/* จัดกระจาย (justify) แบบไทย: กระจายช่องไฟระหว่างทุกตัวอักษร/คำ ไม่ใช่แค่ที่อักขระเว้นวรรค
+   เพราะภาษาไทยส่วนใหญ่ไม่มีการเว้นวรรคระหว่างคำ การใช้ inter-word แบบอังกฤษจะทำให้ช่องไฟ
+   กระจุกที่ช่องว่างไม่กี่แห่งจนห่างผิดปกติ */
+.doc-content { text-justify: inter-character; }
+.doc-content p { margin: 0 0 8px 0; }
+.doc-content ul, .doc-content ol { margin: 0 0 8px 0; padding-left: 28px; }
+.doc-content table { border-collapse: collapse; margin: 0 0 8px 0; }
+.doc-content table td { border: 1px solid #999; padding: 4px 8px; min-width: 40px; }
+.doc-content hr { border: none; border-top: 1px solid #999; margin: 8px 0; }
+.doc-content img { max-width: 100%; }
+
+.page-spacer {
+  display: block;
+  width: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+.page-spacer::after {
+  content: "";
+}
+
+.hard-page-break {
+  display: block;
+  width: 100%;
+  height: 0;
+  border-top: 1px dashed #9bb6d8;
+  margin: 4px 0;
+  user-select: none;
+}
+
+/* Status bar */
+#statusbar {
+  flex: 0 0 auto;
+  background: #2b579a;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 14px;
+  display: flex;
+  gap: 10px;
+}
+#statusbar .sep { opacity: 0.5; }
+
+/* Print area hidden on screen */
+#printArea { display: none; }
+
+.hard-page-break-print { break-before: page; }
+
+.statusbar-link {
+  background: none; border: none; color: #fff; font-size: 12px; cursor: pointer; padding: 0;
+}
+.statusbar-link:hover { text-decoration: underline; }
+
+#wordCountModalBackdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.35);
+  align-items: center; justify-content: center; z-index: 100;
+}
+#wordCountModalBackdrop:not([hidden]) { display: flex; }
+#wordCountModal {
+  background: #fff; border-radius: 6px; padding: 18px 22px; min-width: 280px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+#wordCountModal h3 { margin: 0 0 10px 0; font-size: 15px; }
+#wordCountModal table { border-collapse: collapse; width: 100%; font-size: 13px; }
+#wordCountModal td { padding: 4px 8px; border-bottom: 1px solid #eee; }
+#wordCountModal td:last-child { text-align: right; font-weight: 600; }
+#wordCountModal button { margin-top: 12px; padding: 5px 14px; }
+
+@media print {
+  #titlebar, #ribbon, #workspace, #statusbar { display: none !important; }
+  #printArea {
+    display: block !important;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+}
