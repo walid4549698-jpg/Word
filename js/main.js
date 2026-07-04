@@ -140,6 +140,23 @@
     });
   });
 
+  // ---------- justify: อังกฤษ (เว้นวรรค) vs ไทย (ช่องไฟ) ----------
+  function applyJustify(mode) {
+    const blocks = getSelectedBlocks();
+    blocks.forEach(b => {
+      b.style.textAlign = 'justify';
+      b.style.textJustify = mode;
+    });
+    editorOverlay.focus();
+    scheduleRecompute();
+    updateWordCount();
+  }
+  [['btnJustifyEnglish', 'inter-word'], ['btnJustifyThai', 'inter-character']].forEach(([id, mode]) => {
+    const btn = document.getElementById(id);
+    btn.addEventListener('mousedown', e => e.preventDefault());
+    btn.addEventListener('click', () => applyJustify(mode));
+  });
+
   // ---------- font name ----------
   const fontNameSel = document.getElementById('fontName');
   fontNameSel.addEventListener('change', () => {

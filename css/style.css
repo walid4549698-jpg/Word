@@ -177,10 +177,11 @@ html, body {
   white-space: pre-wrap;
   tab-size: 8;
 }
-/* จัดกระจาย (justify) แบบไทย: กระจายช่องไฟระหว่างทุกตัวอักษร/คำ ไม่ใช่แค่ที่อักขระเว้นวรรค
-   เพราะภาษาไทยส่วนใหญ่ไม่มีการเว้นวรรคระหว่างคำ การใช้ inter-word แบบอังกฤษจะทำให้ช่องไฟ
-   กระจุกที่ช่องว่างไม่กี่แห่งจนห่างผิดปกติ */
-.doc-content { text-justify: inter-character; }
+/* กระจายบรรทัด (justify) มีสองแบบตามภาษา ควบคุมทีละย่อหน้าผ่าน inline style (ปุ่มกระจายอังกฤษ/ไทย):
+   - อังกฤษ: text-justify: inter-word  -> กระจายที่ช่องว่างระหว่างคำเท่านั้น (ตามหลักภาษาอังกฤษ)
+   - ไทย:    text-justify: inter-character -> กระจายช่องไฟระหว่างทุกตัวอักษร/คำ เพราะไทยไม่มีวรรคระหว่างคำ
+   ค่าเริ่มต้น (ยังไม่เลือก) ปล่อยให้เบราว์เซอร์ตัดสินใจเอง (auto) */
+.doc-content { text-justify: auto; }
 .doc-content p { margin: 0 0 8px 0; }
 .doc-content ul, .doc-content ol { margin: 0 0 8px 0; padding-left: 28px; }
 .doc-content table { border-collapse: collapse; margin: 0 0 8px 0; }
