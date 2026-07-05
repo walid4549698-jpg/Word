@@ -15,20 +15,19 @@
       <span class="app-logo">W</span>
       <input id="docTitle" type="text" value="เอกสารที่ไม่มีชื่อ" spellcheck="false">
     </div>
+    <nav class="ribbon-tabs">
+      <button class="ribbon-tab active" data-tab="home">หน้าแรก</button>
+      <button class="ribbon-tab" data-tab="insert">แทรก</button>
+      <button class="ribbon-tab" data-tab="layout">เค้าโครงหน้ากระดาษ</button>
+      <button class="ribbon-tab" data-tab="review">ตรวจทาน</button>
+      <button class="ribbon-tab" data-tab="file">ไฟล์</button>
+    </nav>
     <div class="title-right">
       <span id="saveStatus">บันทึกอัตโนมัติแล้ว</span>
     </div>
   </header>
 
   <div id="ribbon">
-    <div class="ribbon-tabs">
-      <button class="ribbon-tab active" data-tab="home">หน้าแรก</button>
-      <button class="ribbon-tab" data-tab="insert">แทรก</button>
-      <button class="ribbon-tab" data-tab="layout">เค้าโครงหน้ากระดาษ</button>
-      <button class="ribbon-tab" data-tab="review">ตรวจทาน</button>
-      <button class="ribbon-tab" data-tab="file">ไฟล์</button>
-    </div>
-
     <div class="ribbon-panels">
 
       <div class="ribbon-panel active" data-panel="home">
@@ -216,24 +215,52 @@
           </div>
           <div class="group-label">ไฟล์</div>
         </div>
+        <div class="group">
+          <div class="group-row">
+            <button id="btnImportPdf">นำเข้า PDF (แก้ไขได้)</button>
+            <input type="file" id="pdfInput" accept=".pdf" hidden>
+          </div>
+          <div class="group-row">
+            <span id="pdfImportStatus" style="font-size:12px;color:#8a8a8f;"></span>
+          </div>
+          <div class="group-label">แปลง PDF</div>
+        </div>
       </div>
 
     </div>
   </div>
 
-  <div id="workspace">
-    <div id="paperScaleWrap">
-      <div id="rulerBar">
-        <div class="ruler-margin-zone" id="rulerMarginLeft"></div>
-        <div class="ruler-margin-zone" id="rulerMarginRight"></div>
-        <div id="rulerTicks"></div>
-        <div class="ruler-marker ruler-marker-firstline" id="markerFirstLine" title="ระยะเยื้องบรรทัดแรก"></div>
-        <div class="ruler-marker ruler-marker-left" id="markerLeftIndent" title="ระยะเยื้องซ้าย"></div>
-        <div class="ruler-marker ruler-marker-right" id="markerRightIndent" title="ระยะเยื้องขวา"></div>
+  <div id="mainArea">
+    <aside id="iconRail">
+      <button id="railSearch" title="ค้นหาในเอกสาร">🔍</button>
+      <button id="railWordCount" title="จำนวนคำ">🗨</button>
+      <button id="railRulerToggle" class="active" title="แสดง/ซ่อนไม้บรรทัด">📐</button>
+      <button id="railNew" title="สร้างเอกสารใหม่">➕</button>
+    </aside>
+
+    <div id="workspace">
+      <div id="findBar" hidden>
+        <input id="findInput" type="text" placeholder="ค้นหาข้อความ...">
+        <span id="findCount"></span>
+        <button id="findPrev" title="ก่อนหน้า">↑</button>
+        <button id="findNext" title="ถัดไป">↓</button>
+        <button id="findClose" title="ปิด">✕</button>
       </div>
-      <div id="paperOuter">
-        <div id="pageBgStack"></div>
-        <div id="editorOverlay" class="doc-content" contenteditable="true" lang="th" spellcheck="false"></div>
+      <div id="paperScaleWrap">
+        <div id="rulerBar">
+          <div class="ruler-margin-zone" id="rulerMarginLeft"></div>
+          <div class="ruler-margin-zone" id="rulerMarginRight"></div>
+          <div id="rulerTicks"></div>
+          <div class="ruler-marker ruler-marker-firstline" id="markerFirstLine" title="ระยะเยื้องบรรทัดแรก (First Line Indent)"></div>
+          <div class="ruler-marker ruler-marker-hanging" id="markerLeftIndent" title="ระยะเยื้องบรรทัดที่ 2 เป็นต้นไป (Hanging Indent)"></div>
+          <div class="ruler-marker ruler-marker-leftbox" id="markerLeftBox" title="ระยะเยื้องซ้ายทั้งย่อหน้า (Left Indent)"></div>
+          <div class="ruler-marker ruler-marker-right" id="markerRightIndent" title="ระยะเยื้องขวา"></div>
+        </div>
+        <div id="paperOuter">
+          <div id="pageBgStack"></div>
+          <div id="editorOverlay" class="doc-content" contenteditable="true" lang="th" spellcheck="false"></div>
+          <div id="rulerGuideLine"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -266,9 +293,11 @@
 <div id="printArea" class="doc-content" lang="th"></div>
 <style id="printPageStyle"></style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="js/thai.js"></script>
 <script src="js/paginate.js"></script>
 <script src="js/ruler.js"></script>
+<script src="js/pdfimport.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
