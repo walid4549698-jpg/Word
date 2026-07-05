@@ -22,6 +22,10 @@ const Paginate = (() => {
 
   let probeEl = null;
   function mmToPx(mm) {
+    // CSS ไม่ยอมให้ height ติดลบ (การกำหนดค่าติดลบจะถูกเมิน ทำให้ probe ค้างค่าเดิม) จึงต้อง
+    // คำนวณขนาดสัมบูรณ์แล้วกลับเครื่องหมายเอง เพื่อรองรับค่าเยื้องติดลบ (เช่น hanging indent
+    // หรือเยื้องบรรทัดแรกที่ลากเข้าไปในโซนระยะขอบ)
+    if (mm < 0) return -mmToPx(-mm);
     if (!probeEl) {
       probeEl = document.createElement('div');
       probeEl.style.position = 'absolute';

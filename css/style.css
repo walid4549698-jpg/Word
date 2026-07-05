@@ -12,81 +12,90 @@ html, body {
   height: 100vh;
 }
 
-/* Titlebar */
+/* Titlebar: logo + tabs + status, all in one compact row */
 #titlebar {
-  background: #2b579a;
-  color: #fff;
+  background: #fff;
+  color: #1b1b1b;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 6px 14px;
+  gap: 18px;
+  padding: 0 14px;
+  border-bottom: 1px solid #e4e4e7;
   flex: 0 0 auto;
+  height: 44px;
 }
-.title-left { display: flex; align-items: center; gap: 10px; }
+.title-left { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
 .app-logo {
-  background: #fff; color: #2b579a; font-weight: 700;
-  width: 26px; height: 26px; border-radius: 4px;
+  background: linear-gradient(135deg, #4a86e8, #2b579a); color: #fff; font-weight: 700;
+  width: 26px; height: 26px; border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
 }
 #docTitle {
-  background: transparent; border: 1px solid transparent; color: #fff;
-  font-size: 14px; padding: 3px 6px; border-radius: 3px; width: 260px;
+  background: transparent; border: 1px solid transparent; color: #1b1b1b;
+  font-size: 13px; padding: 3px 6px; border-radius: 3px; width: 180px;
 }
-#docTitle:hover, #docTitle:focus { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); outline: none; }
-#saveStatus { font-size: 12px; opacity: 0.85; }
+#docTitle:hover, #docTitle:focus { background: #f1f1f3; border-color: #dcdce0; outline: none; }
+.title-right { margin-left: auto; flex: 0 0 auto; }
+#saveStatus { font-size: 12px; color: #8a8a8f; }
 
-/* Ribbon */
-#ribbon { background: #f3f2f1; border-bottom: 1px solid #d0d0d0; flex: 0 0 auto; }
-.ribbon-tabs { display: flex; border-bottom: 1px solid #d9d9d9; background: #fafafa; }
+.ribbon-tabs { display: flex; align-items: center; gap: 2px; flex: 1 1 auto; }
 .ribbon-tab {
-  background: none; border: none; padding: 8px 18px; font-size: 13.5px;
-  cursor: pointer; color: #333; border-bottom: 2px solid transparent;
+  background: none; border: none; padding: 6px 14px; font-size: 13px;
+  cursor: pointer; color: #444; border-radius: 16px;
 }
-.ribbon-tab:hover { background: #ececec; }
-.ribbon-tab.active { border-bottom: 2px solid #2b579a; color: #2b579a; font-weight: 600; }
+.ribbon-tab:hover { background: #f1f1f3; }
+.ribbon-tab.active { background: #2b7de9; color: #fff; font-weight: 600; }
+
+/* Ribbon toolbar: single compact icon row */
+#ribbon { background: #fff; border-bottom: 1px solid #e4e4e7; flex: 0 0 auto; }
 
 .ribbon-panels { position: relative; }
 .ribbon-panel {
   display: none;
-  padding: 8px 10px;
-  gap: 14px;
-  align-items: flex-start;
+  padding: 6px 12px;
+  gap: 0;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .ribbon-panel.active { display: flex; }
 
 .group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 4px 10px;
-  border-right: 1px solid #e0e0e0;
-  min-height: 62px;
-  justify-content: space-between;
+  padding: 0 10px;
+  border-right: 1px solid #eaeaec;
+  min-height: 34px;
 }
 .group:last-child { border-right: none; }
-.group-row { display: flex; gap: 4px; align-items: center; margin-bottom: 2px; }
-.group-label { font-size: 11px; color: #6b6b6b; margin-top: 2px; }
+.group-row { display: flex; gap: 3px; align-items: center; }
+.group-row + .group-row { margin-left: 6px; }
+.group-label { display: none; }
 
 #ribbon button {
-  background: #fff;
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 5px 7px;
   font-size: 13px;
   cursor: pointer;
-  min-width: 28px;
+  min-width: 30px;
+  color: #333;
 }
-#ribbon button:hover { background: #e8f0fe; border-color: #a9c6f5; }
-#ribbon button.active, #ribbon button.toggle-btn.active { background: #cfe2ff; border-color: #2b579a; }
+#ribbon button:hover { background: #eef2f8; border-color: #dbe6f5; }
+#ribbon button.active, #ribbon button.toggle-btn.active { background: #dbe9fe; border-color: #2b7de9; color: #1a5cc4; }
 
 #ribbon select, #ribbon input[type=number], #ribbon input[type=text] {
-  border: 1px solid #d5d5d5; border-radius: 3px; padding: 3px 5px; font-size: 13px;
+  border: 1px solid #dcdce0; border-radius: 4px; padding: 4px 6px; font-size: 13px;
+  background: #fff;
 }
-#ribbon select#fontName { width: 150px; }
-#ribbon select#fontSize { width: 60px; }
+#ribbon select#fontName { width: 140px; }
+#ribbon select#fontSize { width: 56px; }
 
 .color-swatch { position: relative; display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid #d5d5d5; border-radius: 3px; width: 28px; height: 26px; cursor: pointer; background:#fff; }
+  border: 1px solid transparent; border-radius: 4px; width: 28px; height: 28px; cursor: pointer; background: transparent; }
+.color-swatch:hover { background: #eef2f8; border-color: #dbe6f5; }
 .color-swatch input[type=color] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 #foreColorSwatch { border-bottom: 3px solid #000; }
 #hiliteColorSwatch { border-bottom: 3px solid #ffff00; }
@@ -96,6 +105,46 @@ html, body {
 .custom-size-row, .custom-margin-row { margin-top: 4px; }
 .custom-size-row label, .custom-margin-row label { font-size: 11.5px; display: flex; flex-direction: column; gap: 2px; }
 .custom-size-row input, .custom-margin-row input { width: 60px; }
+
+/* Left icon rail */
+#mainArea { flex: 1 1 auto; display: flex; overflow: hidden; }
+#iconRail {
+  flex: 0 0 auto;
+  width: 42px;
+  background: #fafafa;
+  border-right: 1px solid #e4e4e7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0;
+}
+#iconRail button {
+  width: 30px; height: 30px;
+  border: none; border-radius: 6px;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+  color: #555;
+}
+#iconRail button:hover { background: #eef2f8; }
+#iconRail button.active { background: #dbe9fe; color: #1a5cc4; }
+
+/* Find bar */
+#findBar {
+  position: sticky; top: 0; left: 0; z-index: 20;
+  display: flex; align-items: center; gap: 6px;
+  background: #fff; border: 1px solid #dcdce0; border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 6px 8px; margin: 10px auto 0; width: fit-content;
+}
+#findBar[hidden] { display: none; }
+#findBar input { border: 1px solid #dcdce0; border-radius: 4px; padding: 4px 6px; font-size: 13px; width: 200px; }
+#findBar button { border: none; background: transparent; border-radius: 4px; padding: 4px 7px; cursor: pointer; }
+#findBar button:hover { background: #eef2f8; }
+#findCount { font-size: 12px; color: #8a8a8f; min-width: 50px; }
+.find-highlight { background: #ffe58a; }
+.find-highlight.current { background: #ffb648; }
 
 /* Workspace */
 #workspace {
@@ -139,12 +188,20 @@ html, body {
   border-top: 7px solid #2b579a;
   transform: translateX(-5px);
 }
-.ruler-marker-left {
-  bottom: 0;
+.ruler-marker-hanging {
+  bottom: 4px;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 7px solid #2b579a;
   transform: translateX(-5px);
+}
+.ruler-marker-leftbox {
+  bottom: 0;
+  width: 10px;
+  height: 4px;
+  background: #2b579a;
+  transform: translateX(-5px);
+  z-index: 4;
 }
 .ruler-marker-right {
   bottom: 0;
@@ -153,6 +210,34 @@ html, body {
   border-bottom: 7px solid #b0272d;
   transform: translateX(-5px);
 }
+.ruler-drag-tip {
+  position: absolute;
+  top: calc(100% + 3px);
+  transform: translateX(-50%);
+  background: #2b579a;
+  color: #fff;
+  font-size: 10.5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* เส้นไกด์แนวตั้งขณะลากตัวชี้ไม้บรรทัด ลากลงมาตลอดความสูงหน้ากระดาษ ช่วยเล็งตำแหน่ง
+   ให้ตรงกับข้อความที่มีอยู่แล้วในหน้า (เหมือนเส้นประที่ Word โชว์ตอนลากตัวชี้ระยะเยื้อง) */
+#rulerGuideLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed rgba(43, 87, 154, 0.65);
+  pointer-events: none;
+  z-index: 5;
+  display: none;
+}
+#rulerGuideLine.visible { display: block; }
 
 #pageBgStack {
   display: flex;
@@ -246,7 +331,7 @@ html, body {
 #wordCountModal button { margin-top: 12px; padding: 5px 14px; }
 
 @media print {
-  #titlebar, #ribbon, #workspace, #statusbar { display: none !important; }
+  #app { display: none !important; }
   #printArea {
     display: block !important;
     word-break: normal;
